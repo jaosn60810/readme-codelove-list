@@ -1,7 +1,6 @@
 const core = require('@actions/core');
 const { Toolkit } = require('actions-toolkit');
 const fs = require('fs');
-const cheerio = require('cheerio');
 const axios = require('axios');
 
 // Get inputs from action.yml

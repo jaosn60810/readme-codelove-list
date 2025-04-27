@@ -26,9 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Test Codelove Blog Updater
-        uses: ./
+        uses: jaosn60810/readme-codelove-list@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CODELOVE_USERNAME: 'jason60810'

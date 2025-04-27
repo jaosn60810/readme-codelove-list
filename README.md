@@ -25,7 +25,7 @@ jobs:
   test-action:
     runs-on: ubuntu-latest
     steps:
-      # - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: Test Codelove Blog Updater
         uses: jaosn60810/readme-codelove-list@main
         with:

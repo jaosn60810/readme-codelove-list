@@ -1,5 +1,6 @@
 name: Test Codelove Blog Updater
 
+# You can modify the workflow to run on different events
 on:
   workflow_run:
     workflows: ['Build Action']

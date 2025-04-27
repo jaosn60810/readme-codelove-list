@@ -7,7 +7,6 @@ This GitHub Action automatically fetches your latest blog posts from Codelove an
 1. Create a new file `.github/workflows/codelove-updater.yml` in your repository:
 
 ```yaml
-
 name: Test Codelove Blog Updater
 
 on:
@@ -48,7 +47,9 @@ jobs:
 ```markdown
 ## Latest Blog Posts
 
+<!-- The content between these markers will be automatically updated -->
 <!-- UPDATE_CODELOVE:START -->
+
 - [Conditional Rendering 常見錯誤](http://codelove.tw/@jason60810/post/vx8M53)
 - [useContext 常犯錯誤與如何在 TS 使用](http://codelove.tw/@jason60810/post/n3V0kq)
 <!-- UPDATE_CODELOVE:END -->

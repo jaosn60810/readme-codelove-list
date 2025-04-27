@@ -12,7 +12,7 @@ const readmePath = path.join(__dirname, '../README.md');
 let readmeContent = fs.readFileSync(readmePath, 'utf-8');
 
 // Find the test workflow section
-const startMarker = '```yaml\n';
+const startMarker = '```yaml';
 const endMarker = '```\n\n3. Add the following markers';
 
 // Replace the content between markers

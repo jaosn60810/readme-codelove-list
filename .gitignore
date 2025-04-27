@@ -1,0 +1,42 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# nyc test coverage
+.nyc_output
+
+# IDE folders
+.idea
+.vscode
+*.swp
+*.swo
+
+# Environment variables
+.env
+.env.test
+
+# Package locks
+# Comment out if you're using npm
+# package-lock.json
+# Comment out if you're using yarn
+# yarn.lock 

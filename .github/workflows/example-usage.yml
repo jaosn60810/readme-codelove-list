@@ -1,0 +1,27 @@
+name: Update Codelove Blog Posts
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    name: Update README with latest blog posts
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Update README with latest Codelove blog posts
+        uses: ./ # Uses the action in the root directory
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAX_LINES: 5 # Fetch 5 latest posts
+
+      - name: Commit and push if README changed
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git diff --quiet && git diff --staged --quiet || (git add README.md && git commit -m "docs: update README with latest blog posts" && git push)

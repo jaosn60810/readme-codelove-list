@@ -1,0 +1,50 @@
+name: Build Action
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build action
+        run: npm run build
+
+      - name: Check if dist directory exists
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "dist directory was not created"
+            exit 1
+          fi
+
+      - name: Commit dist directory
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'chore: build action'
+          add: 'dist/'
+          push: true
+          default_author: github_actions

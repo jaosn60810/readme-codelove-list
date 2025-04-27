@@ -1,7 +1,6 @@
 import core from '@actions/core';
 import { Toolkit } from 'actions-toolkit';
 import fs from 'fs';
-import axios from 'axios';
 
 // Get inputs from action.yml
 const {
@@ -24,9 +23,15 @@ core.setSecret(GITHUB_TOKEN);
 
 const getBlogOutline = async () => {
   try {
-    const { data } = await axios.get(
+    const response = await fetch(
       `${CODELOVE_API_URL}?username=${CODELOVE_USERNAME}`
     );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
 
     return data
       .slice(0, MAX_LINES)

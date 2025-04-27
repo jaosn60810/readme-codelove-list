@@ -2,9 +2,7 @@
 node_modules/
 jspm_packages/
 
-# Build outputs
-dist/
-build/
+
 
 # Logs
 logs

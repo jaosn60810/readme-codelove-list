@@ -27,6 +27,10 @@ jobs:
           CODELOVE_API_URL: 'https://codelove.tw/api/posts' # Optional: Custom API URL
           README_START_MARKER: '<!-- UPDATE_CODELOVE:START -->' # Optional: Custom start marker
           README_END_MARKER: '<!-- UPDATE_CODELOVE:END -->' # Optional: Custom end marker
+      - name: Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Update generated README'
 ```
 
 2. Add the following markers to your README.md:

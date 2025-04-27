@@ -1,29 +1,10 @@
-# Codelove Blog Updater Action
+# Codelove Blog Updater
 
-This GitHub Action automatically fetches your latest blog posts from [Codelove](https://codelove.tw) and updates your repository's README.md file.
-
-## How It Works
-
-1. The action fetches blog posts from the Codelove API
-2. It then updates a section in your README.md between specified comment tags
-3. The tags are `<!-- UPDATE_CODELOVE:START -->` and `<!-- UPDATE_CODELOVE:END -->`
+This GitHub Action automatically fetches your latest blog posts from Codelove and updates your README.md file.
 
 ## Usage
 
-### Step 1: Add the Comment Tags to Your README
-
-Add the following comment tags to your README.md file where you want your blog posts to appear:
-
-```markdown
-## Latest Blog Posts
-
-<!-- UPDATE_CODELOVE:START -->
-<!-- UPDATE_CODELOVE:END -->
-```
-
-### Step 2: Create a Workflow
-
-Create a new file in your repository at `.github/workflows/update-readme.yml`:
+1. Create a new file `.github/workflows/codelove-updater.yml` in your repository:
 
 ```yaml
 name: Update Codelove Blog Posts
@@ -36,58 +17,40 @@ on:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-    name: Update README with latest blog posts
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Update README with latest Codelove blog posts
-        uses: yourusername/codelove-blog-updater-action@v1
+      - uses: actions/checkout@v3
+      - uses: your-username/codelove-blog-updater@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MAX_LINES: 5 # Fetch 5 latest posts
+          CODELOVE_USERNAME: 'your-codelove-username'
+          MAX_LINES: '5' # Optional: Number of posts to show (default: 5)
+          CODELOVE_API_URL: 'https://codelove.tw/api/posts' # Optional: Custom API URL
+          README_START_MARKER: '<!-- UPDATE_CODELOVE:START -->' # Optional: Custom start marker
+          README_END_MARKER: '<!-- UPDATE_CODELOVE:END -->' # Optional: Custom end marker
+```
 
-      - name: Commit and push if README changed
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git diff --quiet && git diff --staged --quiet || (git add README.md && git commit -m "docs: update README with latest blog posts" && git push)
+2. Add the following markers to your README.md:
+
+```markdown
+## Latest Blog Posts
+
+<!-- UPDATE_CODELOVE:START -->
+<!-- UPDATE_CODELOVE:END -->
 ```
 
 ## Inputs
 
-| Input                | Description                           | Required | Default                                      |
-| -------------------- | ------------------------------------- | -------- | -------------------------------------------- |
-| `GITHUB_TOKEN`       | GitHub token for authentication       | Yes      | N/A                                          |
-| `MAX_LINES`          | Maximum number of blog posts to fetch | No       | 5                                            |
-| `COMMITTER_USERNAME` | Username for the commit               | No       | github-actions[bot]                          |
-| `COMMITTER_EMAIL`    | Email for the commit                  | No       | github-actions[bot]@users.noreply.github.com |
-| `COMMIT_MSG`         | Commit message                        | No       | docs: update README with latest blog posts   |
-
-## Example
-
-### Before:
-
-```markdown
-## Latest Blog Posts
-
-<!-- UPDATE_CODELOVE:START -->
-<!-- UPDATE_CODELOVE:END -->
-```
-
-### After:
-
-```markdown
-## Latest Blog Posts
-
-<!-- UPDATE_CODELOVE:START -->
-
-- [Title of Post 1](https://codelove.tw/post-1-link)
-- [Title of Post 2](https://codelove.tw/post-2-link)
-- [Title of Post 3](https://codelove.tw/post-3-link)
-<!-- UPDATE_CODELOVE:END -->
-```
+| Input                 | Description                           | Required | Default                                      |
+| --------------------- | ------------------------------------- | -------- | -------------------------------------------- |
+| `GITHUB_TOKEN`        | GitHub token for authentication       | Yes      | -                                            |
+| `CODELOVE_USERNAME`   | Your Codelove username                | Yes      | -                                            |
+| `MAX_LINES`           | Maximum number of blog posts to fetch | No       | 5                                            |
+| `CODELOVE_API_URL`    | Codelove API URL                      | No       | https://codelove.tw/api/posts                |
+| `README_START_MARKER` | Start marker for blog posts section   | No       | <!-- UPDATE_CODELOVE:START -->               |
+| `README_END_MARKER`   | End marker for blog posts section     | No       | <!-- UPDATE_CODELOVE:END -->                 |
+| `COMMITTER_USERNAME`  | Username for the commit               | No       | github-actions[bot]                          |
+| `COMMITTER_EMAIL`     | Email for the commit                  | No       | github-actions[bot]@users.noreply.github.com |
+| `COMMIT_MSG`          | Commit message                        | No       | docs: update README with latest blog posts   |
 
 ## License
 

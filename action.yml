@@ -5,6 +5,13 @@ inputs:
   GITHUB_TOKEN:
     description: 'GitHub token for authentication'
     required: true
+  CODELOVE_USERNAME:
+    description: 'Your Codelove username'
+    required: true
+  CODELOVE_API_URL:
+    description: 'Codelove API URL'
+    required: false
+    default: 'https://codelove.tw/api/posts'
   MAX_LINES:
     description: 'Maximum number of blog posts to fetch'
     required: false
@@ -21,6 +28,14 @@ inputs:
     description: 'Commit message'
     required: false
     default: 'docs: update README with latest blog posts'
+  README_START_MARKER:
+    description: 'Start marker for blog posts section in README'
+    required: false
+    default: '<!-- UPDATE_CODELOVE:START -->'
+  README_END_MARKER:
+    description: 'End marker for blog posts section in README'
+    required: false
+    default: '<!-- UPDATE_CODELOVE:END -->'
 
 runs:
   using: 'node16'

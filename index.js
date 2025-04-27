@@ -10,6 +10,10 @@ const MAX_LINES = core.getInput('MAX_LINES');
 const COMMITTER_USERNAME = core.getInput('COMMITTER_USERNAME');
 const COMMITTER_EMAIL = core.getInput('COMMITTER_EMAIL');
 const COMMIT_MSG = core.getInput('COMMIT_MSG');
+const CODELOVE_USERNAME = core.getInput('CODELOVE_USERNAME');
+const CODELOVE_API_URL = core.getInput('CODELOVE_API_URL');
+const README_START_MARKER = core.getInput('README_START_MARKER');
+const README_END_MARKER = core.getInput('README_END_MARKER');
 
 core.setSecret(GITHUB_TOKEN);
 
@@ -17,7 +21,7 @@ core.setSecret(GITHUB_TOKEN);
 async function getBlogOutline() {
   try {
     const { data } = await axios.get(
-      'https://codelove.tw/api/posts?username=jason60810'
+      `${CODELOVE_API_URL}?username=${CODELOVE_USERNAME}`
     );
 
     const outlineFilter = data.slice(0, MAX_LINES).map((blog) => ({
@@ -41,7 +45,7 @@ Toolkit.run(async (tools) => {
 
     // Find the START tag
     let startIndex = readmeContent.findIndex(
-      (content) => content.trim() === '<!-- UPDATE_CODELOVE:START -->'
+      (content) => content.trim() === README_START_MARKER
     );
 
     // START tag doesn't exist
@@ -51,7 +55,7 @@ Toolkit.run(async (tools) => {
 
     // Find the END tag
     let endIndex = readmeContent.findIndex(
-      (content) => content.trim() === '<!-- UPDATE_CODELOVE:END -->'
+      (content) => content.trim() === README_END_MARKER
     );
 
     // Fetch blog posts
@@ -75,11 +79,7 @@ Toolkit.run(async (tools) => {
       });
 
       // Add END tag
-      readmeContent.splice(
-        startIndex + outline.length,
-        0,
-        '<!-- UPDATE_CODELOVE:END -->'
-      );
+      readmeContent.splice(startIndex + outline.length, 0, README_END_MARKER);
 
       // Write to README.md
       fs.writeFileSync('./README.md', readmeContent.join('\n'));

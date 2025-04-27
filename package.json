@@ -1,27 +1,27 @@
 {
-  "name": "codelove-blog-updater-action",
+  "name": "codelove-blog-updater",
   "version": "1.0.0",
-  "description": "GitHub Action to fetch Codelove blog posts and update README",
+  "description": "GitHub Action to update README with Codelove blog posts",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "ncc build index.js -o dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "update-readme": "node scripts/update-readme.js"
   },
   "keywords": [
-    "github",
-    "action",
-    "readme",
-    "blog",
-    "codelove"
+    "github-action",
+    "codelove",
+    "blog"
   ],
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.10.0",
     "actions-toolkit": "^6.0.1",
-    "axios": "^1.4.0",
+    "axios": "^1.6.2",
     "cheerio": "^1.0.0-rc.12"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.36.1"
+    "@vercel/ncc": "^0.38.1"
   }
 }

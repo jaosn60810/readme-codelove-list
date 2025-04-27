@@ -13,21 +13,9 @@ inputs:
     required: false
     default: 'https://codelove.tw/api/posts'
   MAX_LINES:
-    description: 'Maximum number of blog posts to fetch'
+    description: 'Maximum number of blog posts to include'
     required: false
     default: '5'
-  COMMITTER_USERNAME:
-    description: 'Username for the commit'
-    required: false
-    default: 'github-actions[bot]'
-  COMMITTER_EMAIL:
-    description: 'Email for the commit'
-    required: false
-    default: 'github-actions[bot]@users.noreply.github.com'
-  COMMIT_MSG:
-    description: 'Commit message'
-    required: false
-    default: 'docs: update README with latest blog posts'
   README_START_MARKER:
     description: 'Start marker for blog posts section in README'
     required: false

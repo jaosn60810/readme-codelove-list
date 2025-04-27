@@ -7,9 +7,6 @@ const axios = require('axios');
 // Get inputs from action.yml
 const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
 const MAX_LINES = core.getInput('MAX_LINES');
-const COMMITTER_USERNAME = core.getInput('COMMITTER_USERNAME');
-const COMMITTER_EMAIL = core.getInput('COMMITTER_EMAIL');
-const COMMIT_MSG = core.getInput('COMMIT_MSG');
 const CODELOVE_USERNAME = core.getInput('CODELOVE_USERNAME');
 const CODELOVE_API_URL = core.getInput('CODELOVE_API_URL');
 const README_START_MARKER = core.getInput('README_START_MARKER');

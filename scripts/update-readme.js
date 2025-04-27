@@ -1,11 +1,9 @@
-import { readFile, write } from 'bun';
-
 // Read test.yml content
-const testYml = await readFile('.github/workflows/test.yml', 'utf-8');
+const testYml = await Bun.file('.github/workflows/test.yml').text();
 
 // Read README.md
 const readmePath = 'README.md';
-let readmeContent = await readFile(readmePath, 'utf-8');
+let readmeContent = await Bun.file(readmePath).text();
 
 // Find the test workflow section
 const startMarker = '```yaml';
@@ -18,6 +16,6 @@ const newContent = `${startMarker}\n${testYml}${endMarker}`;
 readmeContent = readmeContent.replace(regex, newContent);
 
 // Write back to README.md
-await write(readmePath, readmeContent);
+await Bun.write(readmePath, readmeContent);
 
 console.log('Successfully updated README.md with test.yml content');

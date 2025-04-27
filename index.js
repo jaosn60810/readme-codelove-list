@@ -1,6 +1,5 @@
 import core from '@actions/core';
 import { Toolkit } from 'actions-toolkit';
-import fs from 'fs';
 
 // Get inputs from action.yml
 const {
@@ -46,7 +45,7 @@ Toolkit.run(async (tools) => {
   try {
     tools.log.debug('Edit README.md Start...');
 
-    const readmeContent = fs.readFileSync('./README.md', 'utf-8').split('\n');
+    let readmeContent = (await Bun.file('./README.md').text()).split('\n');
     const startIndex = readmeContent.findIndex(
       (content) => content.trim() === README_START_MARKER
     );
@@ -77,7 +76,7 @@ Toolkit.run(async (tools) => {
         README_END_MARKER
       );
 
-      fs.writeFileSync('./README.md', readmeContent.join('\n'));
+      await Bun.write('./README.md', readmeContent.join('\n'));
       tools.log.success('Successfully updated README.md');
       return tools.exit.success('Success');
     }
@@ -106,7 +105,7 @@ Toolkit.run(async (tools) => {
       ...blogPosts.split('\n')
     );
 
-    fs.writeFileSync('./README.md', readmeContent.join('\n'));
+    await Bun.write('./README.md', readmeContent.join('\n'));
     tools.log.success('Updated README with the recent blog posts');
     return tools.exit.success('Success');
   } catch (error) {

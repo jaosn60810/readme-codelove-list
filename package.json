@@ -2,12 +2,11 @@
   "name": "codelove-blog-updater",
   "version": "1.0.0",
   "description": "GitHub Action to update README with Codelove blog posts",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ncc build index.js -o dist",
-    "update-readme": "node scripts/update-readme.js"
+    "build": "bun build index.js --outdir dist",
+    "update-readme": "bun run scripts/update-readme.js"
   },
   "keywords": [
     "github-action",
@@ -21,6 +20,6 @@
     "actions-toolkit": "^6.0.1"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.38.1"
+    "bun-types": "latest"
   }
 }

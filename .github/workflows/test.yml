@@ -17,6 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 'latest'
       - name: Test Codelove Blog Updater
         uses: jaosn60810/readme-codelove-list@main
         with:

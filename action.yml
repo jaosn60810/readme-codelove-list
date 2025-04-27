@@ -26,8 +26,16 @@ inputs:
     default: '<!-- UPDATE_CODELOVE:END -->'
 
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v3
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: 'latest'
+    - run: bun install
+      shell: bash
+    - run: bun run index.js
+      shell: bash
 
 branding:
   icon: 'book'

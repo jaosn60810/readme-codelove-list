@@ -11,7 +11,12 @@ This GitHub Action automatically fetches your latest blog posts from Codelove an
 name: Test Codelove Blog Updater
 
 on:
-  workflow_dispatch: # Allows manual triggering
+  workflow_run:
+    workflows: ['Build Action']
+    types:
+      - completed
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -26,8 +31,8 @@ jobs:
         uses: ./
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CODELOVE_USERNAME: 'jasonmoney'
-          MAX_LINES: '3'
+          CODELOVE_USERNAME: 'jason60810'
+          MAX_LINES: '10'
           README_START_MARKER: '<!-- UPDATE_CODELOVE:START -->'
           README_END_MARKER: '<!-- UPDATE_CODELOVE:END -->'
 

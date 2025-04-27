@@ -1,9 +1,10 @@
 name: Test Codelove Blog Updater
 
 on:
-  push:
-    branches: [main]
-  pull_request:
+  workflow_run:
+    workflows: ['Build Action']
+    types:
+      - completed
     branches: [main]
   workflow_dispatch:
 

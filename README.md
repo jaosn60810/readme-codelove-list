@@ -9,6 +9,7 @@ This GitHub Action automatically fetches your latest blog posts from Codelove an
 ```yaml
 name: Test Codelove Blog Updater
 
+# You can modify the workflow to run on different events
 on:
   workflow_run:
     workflows: ['Build Action']

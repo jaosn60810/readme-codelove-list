@@ -21,10 +21,8 @@ jobs:
         uses: jaosn60810/readme-codelove-list@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # You can modify the CODELOVE_USERNAME to your own
           CODELOVE_USERNAME: 'jason60810'
-          MAX_LINES: '10'
-          README_START_MARKER: '<!-- UPDATE_CODELOVE:START -->'
-          README_END_MARKER: '<!-- UPDATE_CODELOVE:END -->'
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9

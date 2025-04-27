@@ -15,7 +15,7 @@ inputs:
   MAX_LINES:
     description: 'Maximum number of blog posts to include'
     required: false
-    default: '5'
+    default: '10'
   README_START_MARKER:
     description: 'Start marker for blog posts section in README'
     required: false
